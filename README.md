@@ -1,4 +1,3 @@
-![头像][header]
 # Study-Notes
 
 本仓库将记录本人学习web相关技术的笔记,先提个大纲，内容慢慢再添吧
@@ -26,7 +25,3 @@
 ### 其他
 1. git
 1. svn
-
-
-
-[header]: ./pic/coderzhuang.jpeg
