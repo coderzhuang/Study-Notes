@@ -78,10 +78,10 @@ pidfile /var/run/redis.pid
 
 ### loglevel
 日志级别
-	* debug (a lot of information, useful for development/testing)
-	* verbose (many rarely useful info, but not a mess like the debug level)
-	* notice (moderately verbose, what you want in production probably) 默认级别
-	* warning (only very important / critical messages are logged)
+* debug (a lot of information, useful for development/testing)
+* verbose (many rarely useful info, but not a mess like the debug level)
+* notice (moderately verbose, what you want in production probably) 默认级别
+* warning (only very important / critical messages are logged)
 
 ### logfile
 
@@ -107,7 +107,7 @@ pidfile /var/run/redis.pid
 
 设置数据库个数
 
-###always-show-logo
+### always-show-logo
 
 设置是否显示redis logo图标，没什么用
 
@@ -141,22 +141,22 @@ rename-command keys ""
 
 ### maxmemory-policy
 设置内存回收策略
-	* volatile-lru - > 使用类LRU算法删除过期集合中的键
-	* allkeys-lru - >使用类LRU算法删除任何密钥。
-	* volatile-lfu - > 使用类LFU算法删除过期集合中的键
-	* allkeys-lfu - >使用类LFU算法删除任何密钥。
-	* volatile-random - >随机删除过期集合中的键
-	* allkeys-random - >随机删除任何键
-	* volatile-ttl - >删除最近过期的键
-	* noviction - >不要驱逐任何东西，只需在写入操作时返回错误。
+* volatile-lru - > 使用类LRU算法删除过期集合中的键
+* allkeys-lru - >使用类LRU算法删除任何密钥。
+* volatile-lfu - > 使用类LFU算法删除过期集合中的键
+* allkeys-lfu - >使用类LFU算法删除任何密钥。
+* volatile-random - >随机删除过期集合中的键
+* allkeys-random - >随机删除任何键
+* volatile-ttl - >删除最近过期的键
+* noviction - >不要驱逐任何东西，只需在写入操作时返回错误。
 
-* lru（最近最少使用）算法
+#### lru（最近最少使用）算法
 
     该值将影响贴近真实lru算法的程度，10会很接近但会消耗更多的cpu
 
     maxmemory-samples 5
 
-* lfu（最不常用）算法
+#### lfu（最不常用）算法
 
     lfu计数器只有8位，最大值255，所以它并不是来一次访问就自增1的，而是根据概率自增，对应的概率分布计算公式为：
 
