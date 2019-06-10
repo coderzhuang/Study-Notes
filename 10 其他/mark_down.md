@@ -42,4 +42,4 @@ ___
 ![头像][header]
 
 [1]: http://www.baidu.com/  "百度"
-[header]: ./pic/coderzhuang.jpeg  "图片"
+[header]: ../pic/coderzhuang.jpeg  "图片"
