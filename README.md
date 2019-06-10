@@ -20,7 +20,6 @@
 1. 数据库
     MySQL
     memcache，redis，mongodb
-1. SEO
 
 ### 其他
 1. git
