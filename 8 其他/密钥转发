@@ -1,0 +1,58 @@
+
+环境：mac
+
+一 密钥对的原理
+私钥要自己保留， 公钥可以公开
+
+公钥可以解密私钥加密的数据
+	可以用在数字签字， 用户登录等。
+私钥可以解密公钥加密的数据
+	可以用在信息加密传输
+
+
+二 密钥对的实际应用--ssh无密码登陆
+1 生成密钥对,如果已存在就不要生成了
+$ssh-keygen
+一路回车，会在 ~/.ssh/ 生成id_rsa, id_rsa.pub 
+这两个文件就是你的凭证，放在哪个机器都可以用
+
+2 
+将id_rsa.pub 上传到目标服务器，并追加到目标服务器的 ~/.ssh/authorized_keys
+这样再次链接的时候，就不需要输入密码了
+
+==========================================================================================
+密钥转发
+
+* 查看已代理的密钥
+ssh-add -l
+如果还没有， 就添加一下
+ssh-add ~/.ssh/id_rsa
+
+一 可以在全局配置开启密钥转发, 所有的链接默认都转发
+1
+/etc/ssh/ssh_config
+#ForwardAgent no ->  ForwardAgent yes
+
+2 链接
+ssh root@192.168.X.X
+
+二 可以配置指定的链接使用代理
+1
+编辑  ~/.ssh/config
+
+#测试
+Host            test
+ForwardAgent	yes
+HostName        192.168.X.X
+Port            22
+User            root
+
+2 链接
+ssh test
+
+三 直接加参数进行连接
+ssh -A root@192.168.X.X 
+
+
+* 测试
+ssh -T git@github.com
