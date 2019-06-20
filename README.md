@@ -10,7 +10,7 @@
 1. 计算机网络
 
 ## 网站应用技能
-1. http协议
+1. http协议dddd
 1. linux命令
 1. nginx
 1. php-fpm

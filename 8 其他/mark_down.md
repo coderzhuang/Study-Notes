@@ -19,6 +19,7 @@
 显示时会自动显示成1，2，3。。
 1. aaa
 1. bbb
+1. ccc
 
 ### 代码
 4个空格开头的或 ```` 包围起来的
@@ -40,6 +41,15 @@ ___
 
 ### 图片
 ![头像][header]
+
+- [x] aaa
+- [x] bbb
+- [ ] ccc
+
+aaa | bbb | ccc
+-|-|-
+1|2|3
+4|5|6
 
 [1]: http://www.baidu.com/  "百度"
 [header]: ../pic/coderzhuang.jpeg  "图片"
