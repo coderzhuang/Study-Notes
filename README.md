@@ -15,9 +15,6 @@
 1. nginx
 1. php-fpm
 1. swoole
-1. php
-    编程规范
-    oop思想，常见设计模式
 1. 数据库
     MySQL
     memcache，redis，mongodb
@@ -43,7 +40,7 @@
 * 安全
 * 成本
 
-### 代码维护的关注点
+### 代码维护的关注点(oop)
 * 可复用
 * 可维护
 * 可扩展
