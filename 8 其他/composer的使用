@@ -1,0 +1,61 @@
+本文目标阅读用户是未接触过composer包的新手，旨在帮助新手快速了解并上手composer。
+本文不涉及composer的安装，详见官方文档：https://docs.phpcomposer.com/
+
+
+一 composer是什么
+Composer 是 PHP 的一个依赖管理工具。
+在没有composer之前，如果想要使用第三方包，首先得手动下载对应的包文件到当前的项目目录，在真正使用之前还得使用“include/require”命令或者注册autoload，同时，如果发现依赖的包官方更新了，我们想要更新就得再手动下载。总之，操作繁琐，效率低下。composer 就是为了解决这些问题而诞生的。
+
+二 简单使用
+在项目根目录创建 composer.json 文件（内容为json格式）
+其中最主要的命令为 “require”，该命令描述了项目的依赖关系，示例：
+{
+    "require": {
+        "monolog/monolog": "1.2.*"
+    }
+}
+接着运行命令 “composer install”，安装完成后会在根目录生成 vendor 文件夹和 composer.lock 文件。建议将 composer.lock 文件提交到代码库。一般不建议将vendor目录提交到代码库，如果当前项目是工程类，为了构建的方便可以例外。
+
+在项目的入口文件，添加如下代码即可实现自动加载：
+require 'vendor/autoload.php';
+$log = new Monolog\Logger('name');// 不需要额外的引入类操作
+
+
+*Tips
+composer install 
+	命令将会检查锁文件是否存在，如果存在，它将下载指定的版本（忽略 composer.json 文件中的定义）。如果不存在锁文件，Composer 将读取 composer.json 并创建锁文件。
+composer update
+	获取最新匹配的版本（根据你的 composer.json 文件）并将新版本更新进锁文件, 请小心使用，如果存在代码兼容性问题可能造成程序不可用。一般，我们会更新指定的依赖：
+	composer update monolog/monolog [...]
+
+三 包的源：记录获取包的地方
+	默认情况下，依赖的包是从 packagist.org 下载的(可以登录 https://packagist.org 查看可用的包)，如果你希望引入github上的包，或者想要从私有源下载包，可以在“repositories”设置：
+	{
+		"repositories": [
+			{"type": "git","url": "https://github.com/foobar/intermediate.git"},
+			{"type": "composer","url": "https://private.com/"},
+		]
+	}
+
+	"repositories"命令块的顺序是非常重要的，当 Composer 查找资源包时，它会按照顺序进行。默认情况下 Packagist 是最后加入的，因此自定义设置将可以覆盖 Packagist 上的包。
+
+	由于一些“你懂的”的原因，我们通常会将默认的 Packagist 源设置为国内镜像，且是全局设置。
+	composer config -g repo.packagist composer https://packagist.phpcomposer.com
+	如果需要解除镜像并恢复到 packagist 官方源，请执行以下命令：
+	composer config -g --unset repos.packagist
+
+四 自动加载
+	可以通过命令块“autoload”设置自己的自动加载
+	目前支持4种类型的自动加载：PSR-0、PSR-4、classmap、files，不建议使用PSR-0
+	{
+	    "autoload": {
+	        "psr-4": {"Acme\\": "src/"},
+	        "classmap": ["tests/"],
+	        "files": ["src/MyLibrary/functions.php"]
+	    }
+	}
+	PSR-4:定义一个从命名空间到目录的映射，src 和项目根目录同级。例如 src/Foo.php 文件应该包含 Acme\Foo 类。
+	Classmap：支持自定义加载的不遵循 PSR-4 规范的类库。扫描tests目录中所有的 .php 和 .inc 文件里内置的类。
+	files:在每次请求时都会载入这些文件（其他方式只是记录了类和文件的映射，使用时才载入）。通常作为函数库的载入方式（而非类库）
+
+	注意，每次修改“autoload”命令块或在映射目录下增加新的类(psr-4方式可忽略)，都要执行下 “composer dumpautoload”
