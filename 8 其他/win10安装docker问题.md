@@ -11,6 +11,14 @@
 
 	Toolbox 默认只能访问 C:\Users 需要设置虚拟机配置 https://www.jianshu.com/p/b18122eaddc3
 
+	This computer doesn't have VT-X/AMD-v enabled. Enabling it in the BIOS is mandatory
+		可能是检测问题，进bios查看，虚拟支持是开启的
+		docker-machine create default --virtualbox-boot2docker-url=boot2docker.iso  --virtualbox-no-vtx-check
+
+	共享文件夹出不来
+		更新vbox到版本6
+
+
 
 问题描述：
 	docker-machine ssh default 进入docker建立的虚拟机
